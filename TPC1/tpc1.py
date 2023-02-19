@@ -1,4 +1,5 @@
 import math
+import matplotlib.pyplot as plt
 
 # Retorna uma lista de listas que reprensenta a informação no ficheiro csv
 def carregaFicheiro(path):
@@ -63,43 +64,145 @@ def imprimeDist(dist, sexo=False, idade=False, colesterol=False):
 
     if sexo:
         print("Quantidade de casos de doença por Sexo")
-        print("|   Feminino   |   Masculino   |")
-        print("--------------------------------")
-        print(f"|      {dist['Feminino']}      |      {dist['Masculino']}      |")
-        print("--------------------------------\n")
+        print("------------------------------------")
+        print("|    Sexo    | Quantidade de Casos |")
+        print("------------------------------------")
+        print(f"|  Feminino  |         {dist['Feminino']}          |")
+        print("------------------------------------")
+        print(f"|  Masculino |         {dist['Masculino']}         |")
+        print("------------------------------------\n")
     elif idade:
         print("Quantidade de casos de doença por Faixa Etária")
-        print("---------------")
+        print("--------------------------------------")
+        print("| Faixa Etária | Quantidade de Casos |")
+        print("--------------------------------------")
         keys = list(dist.keys())
         keys.sort()
         for key in keys:
             if len(str(dist[key])) == 1:
-                print(f"[{(key-1)*5}-{key*5-1}] | {dist[key]}   |")
+                print(f"|    [{(key-1)*5}-{key*5-1}]   |          {dist[key]}          |")
             elif len(str(dist[key])) == 2:
-                print(f"[{(key-1)*5}-{key*5-1}] | {dist[key]}  |")
+                print(f"|    [{(key-1)*5}-{key*5-1}]   |          {dist[key]}         |")
             else:
-                print(f"[{(key-1)*5}-{key*5-1}] | {dist[key]} |")
-            print("---------------")
+                print(f"|    [{(key-1)*5}-{key*5-1}]   |         {dist[key]}         |")
+            print("--------------------------------------")
+        print("\n")
+    elif colesterol:
+        print("Quantidade de casos de doença por níveis de Colesterol")
+        print("---------------------------------------------")
+        print("| Nível de Colesterol | Quantidade de Casos |")
+        print("---------------------------------------------")
+        keys = list(dist.keys())
+        keys.sort()
+        for key in keys:
+            print(f"|      [{(key-1)*10}-{key*10 - 1}]      |         {dist[key]}         |")
+            print("---------------------------------------------")
         print("\n")
 
 est = carregaFicheiro('myheart.csv')
 
+print("----------------------------------------- Tabelas ----------------------------------")
+
 print("Distribuição da doença por Sexo")
-dic = distSexo(est)
-# print(f"Quantidade de casos da doença no Sexo Feminino: {dic['Feminino']}")
-# print(f"Quantidade de casos da doença no Sexo Masculino: {dic['Masculino']}\n")
-imprimeDist(dic, sexo=True)
+dicSex = distSexo(est)
+imprimeDist(dicSex, sexo=True)
 
 print("Distribuição da doença por Faixa Etária")
-dic = distEscaloesEtarios(est)
-# for key in dic.keys():
-#     print(f"Quantidade de casos da doença na faixa etária [{(key-1)*5}-{key*5-1}]: {dic[key]}")
-# print("\n")
-imprimeDist(dic, idade=True)
+dicEt = distEscaloesEtarios(est)
+imprimeDist(dicEt, idade=True)
 
 print("Distribuição da doença por Níveis de Colesterol")
-dic = distColesterol(est)
-for key in dic.keys():
-    print(f"Quantidade de casos da doença no nível de colesterol [{(key-1)*10}-{key*10-1}]: {dic[key]}")
-print("\n")
+dicCol = distColesterol(est)
+imprimeDist(dicCol, colesterol=True)
 
+# ----------------------------------------- Gráficos -------------------------------------
+# -- Por Sexo
+# x-coordinates of left sides of bars 
+# 1 -> Feminino | 2 -> Masculino 
+left = [1, 2]
+  
+# heights of bars
+height = [dicSex['Feminino'], dicSex['Masculino']]
+  
+# labels for bars
+tick_label = ['Feminino', 'Masculino']
+  
+# plotting a bar chart
+plt.bar(left, height, tick_label = tick_label,
+        width = 0.8, color = ['red', 'green'])
+  
+# naming the x-axis
+plt.xlabel('Sexo')
+# naming the y-axis
+plt.ylabel('Quantidade de Casos')
+# plot title
+plt.title('Gráfico de Barras')
+  
+# function to show the plot
+plt.show()
+
+
+# -- Por Faixa Etária
+# x-coordinates of left sides of bars 
+keys = list(dicEt.keys())
+keys.sort()
+left = []
+for i in range(len(dicEt)):
+    left.append(i+1)
+
+# heights of bars
+height = []
+for key in keys:
+    height.append(dicEt[key])
+  
+# labels for bars
+tick_label = []
+for key in keys:
+    tick_label.append(f'[{(key-1)*5}-{key*5-1}]')
+  
+# plotting a bar chart
+plt.bar(left, height, tick_label = tick_label,
+        width = 0.8, color = ['red', 'green'])
+  
+# naming the x-axis
+plt.xlabel('Faixa Etária')
+# naming the y-axis
+plt.ylabel('Quantidade de Casos')
+# plot title
+plt.title('Gráfico de Barras')
+  
+# function to show the plot
+plt.show()
+
+
+# -- Por Níveis de Colesterol
+# x-coordinates of left sides of bars
+keys = list(dicCol.keys())
+keys.sort()
+left = []
+for i in range(len(dicCol)):
+    left.append(i+1)
+
+# heights of bars
+height = []
+for key in keys:
+    height.append(dicCol[key])
+  
+# labels for bars
+tick_label = []
+for key in keys:
+    tick_label.append(f'[{(key-1)*10}-{key*10-1}]')
+  
+# plotting a bar chart
+plt.bar(left, height, tick_label = tick_label,
+        width = 0.8, color = ['red', 'green'])
+  
+# naming the x-axis
+plt.xlabel('Níveis de Colesterol')
+# naming the y-axis
+plt.ylabel('Quantidade de Casos')
+# plot title
+plt.title('Gráfico de Barras')
+  
+# function to show the plot
+plt.show()
