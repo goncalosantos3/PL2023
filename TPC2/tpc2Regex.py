@@ -11,19 +11,16 @@ while inp != "":
     if inp == "=":
         print(total)    
     else:
-        res = re.search("on|ON|oN|On", inp)
+        res = re.search("on", inp.lower())
         if res != None:
             stop = False
         else:
-            res = re.search("off|ofF|oFf|Off|oFF|OFf|OfF|OFF", inp)
+            res = re.search("off", inp.lower())
             if res != None:
                 stop = True
             elif stop == False:
-                res = re.search("[0-9]*" ,inp)
-                while res != None:
-                    number = res.group()
-                    total += int(number)
-                    inp = inp.replace(number,"")
-                    res = re.search("[0-9]+" ,inp)
+                lst = re.findall("[0-9]+" ,inp)
+                for elem in lst:
+                    total += int(elem)
         
     inp = input(">> ")

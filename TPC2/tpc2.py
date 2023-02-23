@@ -1,26 +1,16 @@
 print("Bem-Vindo ao meu programa Somador On/Off implementado em Python!")
 print("Insira digitos para realizar uma soma")
 
-def compara(ele, lst):
-
-    for elem in lst:
-        if elem == ele:
-            return True
-        
-    return False
-
 c = ''
 total = 0
 stop = False
-off = ["off","ofF","oFf","Off","oFF","OFf","OfF","OFF"]
-on = ["on", "On", "oN","ON"]
 inp = input(">> ")
 
 while inp != "":
 
-    if compara(inp,off):
+    if "off" == inp.lower():
         stop = True
-    elif compara(inp,on):
+    elif "on" == inp.lower():
         stop = False  
     elif inp == "=":
         print(total)
@@ -37,10 +27,8 @@ while inp != "":
                 i += 1
 
             if numero != "":
-                print("Número-> " + numero)
                 total += int(numero)
                 numero = ""
             i += 1
         
-
     inp = input(">> ")
