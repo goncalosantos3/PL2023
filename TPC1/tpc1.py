@@ -196,7 +196,7 @@ for key in keys:
 # plotting a bar chart
 plt.bar(left, height, tick_label = tick_label,
         width = 0.8, color = ['red', 'green'])
-  
+
 # naming the x-axis
 plt.xlabel('Níveis de Colesterol')
 # naming the y-axis
