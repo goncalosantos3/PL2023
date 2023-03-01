@@ -22,9 +22,10 @@ while inp != "":
         while i < len(inp):
             c = inp[i]
             while c.isdigit() and i < len(inp):
-                c = inp[i]
                 numero += c
                 i += 1
+                if i < len(inp):
+                    c = inp[i]
 
             if numero != "":
                 total += int(numero)
