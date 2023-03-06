@@ -24,4 +24,17 @@ for line in file.readlines():
 
 print(dicGlobal)
 
+print("\n---------------------------------- Top 5 Nomes e Apelidos mais usados por século: --------------------------\n")
+
+for seculo in dicGlobal.keys():
+    print(f"Século {seculo}:")
+    sortedSec = sorted(dicGlobal[seculo])
+    i = 0 
+
+    while i < 5:
+        print(f"{i+1}: {sortedSec[i]}")
+        i += 1
+
+    print("\n")
+
 file.close()
