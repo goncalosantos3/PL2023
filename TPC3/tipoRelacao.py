@@ -4,7 +4,7 @@ dicGlobal = {}
 file = open("processos.txt")
 
 for line in file.readlines():
-    lista = re.findall(r',(\w[\w\s]+\w).', line)
+    lista = re.findall(r'[A-Z][a-z]*\s*,(\w[\w\s]+\w).', line)
 
     for relacao in lista:
         if relacao not in dicGlobal.keys():
