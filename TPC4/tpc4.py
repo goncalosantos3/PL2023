@@ -24,7 +24,6 @@ with open("input.csv") as f:
         else:
             print("Fudeu")
 
-
 jsonStr = json.dumps(alunos, indent = 2, ensure_ascii = False)
 fout = open("output.json", "w")
 fout.write(jsonStr)
