@@ -1,4 +1,4 @@
-Número,Nome,Curso
-3162,Cândido Faísca,Teatro
-7777,Cristiano Ronaldo,Desporto
-264,Marcelo Sousa,Ciência Política
+Número,Nome,Curso,Notas{2},
+3162,Cândido Faísca,Teatro,12,15
+7777,Cristiano Ronaldo,Desporto,17,20
+264,Marcelo Sousa,Ciência Política,20,22
